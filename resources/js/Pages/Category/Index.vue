@@ -1,7 +1,12 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
-import { Link } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
+
+const props = defineProps({
+    categories: Object,
+});
+
+console.log(props.categories);
 </script>
 
 <template>
@@ -15,16 +20,17 @@ import { Link } from "@inertiajs/vue3";
                 <Link
                     :href="route('category.create')"
                     class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                    >Create Category</Link
                 >
+                    Create Category
+                </Link>
             </div>
         </template>
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div
-                    class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
-                ></div>
+                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                    <!-- Add any additional content here -->
+                </div>
 
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table
@@ -44,66 +50,42 @@ import { Link } from "@inertiajs/vue3";
                                     Date added
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    <span class="sr-only">Edit</span>
+                                    <span class="sr-only">Actions</span>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- Loop through categories dynamically -->
                             <tr
+                                v-for="category in props.categories.data"
+                                :key="category.id"
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                             >
-                                <th
-                                    scope="row"
+                                <td
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                 >
-                                    Apple MacBook Pro 17"
-                                </th>
-                                <td class="px-6 py-4">Silver</td>
-                                <td class="px-6 py-4">Laptop</td>
-                                <td class="px-6 py-4 text-right">
-                                    <a
-                                        href="#"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                        >Edit</a
-                                    >
+                                    {{ category.name }}
                                 </td>
-                            </tr>
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                            >
-                                <th
-                                    scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                >
-                                    Microsoft Surface Pro
-                                </th>
-                                <td class="px-6 py-4">White</td>
-                                <td class="px-6 py-4">Laptop PC</td>
-                                <td class="px-6 py-4 text-right">
-                                    <a
-                                        href="#"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                        >Edit</a
-                                    >
+                                <td class="px-6 py-4">
+                                    {{ category.description }}
                                 </td>
-                            </tr>
-                            <tr
-                                class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
-                            >
-                                <th
-                                    scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                >
-                                    Magic Mouse 2
-                                </th>
-                                <td class="px-6 py-4">Black</td>
-                                <td class="px-6 py-4">Accessories</td>
+                                <td class="px-6 py-4">
+                                    {{ category.created_at }}
+                                </td>
                                 <td class="px-6 py-4 text-right">
-                                    <a
-                                        href="#"
+                                    <Link
+                                        :href="
+                                            route('category.edit', category.id)
+                                        "
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                        >Edit</a
                                     >
+                                        Edit
+                                    </Link>
+                                    <button
+                                        class="ml-2 text-red-600 hover:underline"
+                                    >
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

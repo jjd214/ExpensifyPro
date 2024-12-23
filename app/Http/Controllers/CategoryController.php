@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Inertia\Inertia;
 
@@ -16,7 +17,9 @@ class CategoryController extends Controller
     {
         //
         $category = Category::all();
-        return Inertia::render('Category/Index');
+        return Inertia::render('Category/Index', [
+            'categories' => CategoryResource::collection($category)
+        ]);
     }
 
     /**
