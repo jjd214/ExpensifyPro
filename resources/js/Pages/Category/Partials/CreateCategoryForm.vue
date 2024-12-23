@@ -2,6 +2,9 @@
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { useForm } from "@inertiajs/vue3";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 const form = useForm({
     name: "",
@@ -10,7 +13,10 @@ const form = useForm({
 
 const submitForm = () => {
     form.post(route("category.store"), {
-        onError: () => form.reset(),
+        onSuccess: () => {
+            toast.success("Category created successfully.");
+            Inertia.visit(route("category.index"));
+        },
     });
 };
 </script>
