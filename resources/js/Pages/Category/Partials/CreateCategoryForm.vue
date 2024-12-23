@@ -15,7 +15,7 @@ const submitForm = () => {
     form.post(route("category.store"), {
         onSuccess: () => {
             toast.success("Category created successfully.");
-            Inertia.visit(route("category.index"));
+            form.reset();
         },
     });
 };
@@ -33,9 +33,9 @@ const submitForm = () => {
                     v-model="form.name"
                     autocomplete="name"
                 />
-                <span class="text-red-600"
-                    ><small>{{ form.errors.name }}</small></span
-                >
+                <span class="text-red-600">
+                    <small>{{ form.errors.name }}</small>
+                </span>
             </div>
             <div class="mb-4">
                 <InputLabel for="description" value="Category description" />
@@ -46,9 +46,9 @@ const submitForm = () => {
                     v-model="form.description"
                     autocomplete="description"
                 />
-                <span class="text-red-600"
-                    ><small>{{ form.errors.description }}</small></span
-                >
+                <span class="text-red-600">
+                    <small>{{ form.errors.description }}</small>
+                </span>
             </div>
             <div class="mb-4">
                 <button

@@ -15,6 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
+        $category = Category::all();
         return Inertia::render('Category/Index');
     }
 
@@ -34,6 +35,7 @@ class CategoryController extends Controller
     {
         //
         Category::create($request->all());
+        return redirect()->route('category.index');
     }
 
     /**
