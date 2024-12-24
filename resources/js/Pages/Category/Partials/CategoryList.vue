@@ -1,9 +1,16 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
+import { router } from "@inertiajs/vue3";
 
 defineProps({
     categories: Array,
 });
+
+const confirmationDelete = (event) => {
+    if (!confirm(`Are you sure you want to delete this category?`)) {
+        event.preventDefault();
+    }
+};
 </script>
 
 <template>
@@ -45,7 +52,17 @@ defineProps({
                         :href="route('category.edit', category.id)"
                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
-                        View
+                        Edit
+                    </Link>
+                    <Link
+                        :href="route('category.destroy', category.id)"
+                        method="delete"
+                        as="button"
+                        type="button"
+                        @click="confirmationDelete"
+                        class="font-medium text-red-600 dark:text-red-500 hover:underline"
+                    >
+                        Delete
                     </Link>
                 </td>
             </tr>
