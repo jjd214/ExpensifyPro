@@ -6,8 +6,6 @@ import EditCategoryForm from "./Partials/EditCategoryForm.vue";
 const props = defineProps({
     category: Object,
 });
-
-console.log(props.category);
 </script>
 
 <template>

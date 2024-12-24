@@ -1,13 +1,15 @@
 <script setup>
+import { useForm } from "@inertiajs/vue3";
 import { reactive, onMounted } from "vue";
+import { useToast } from "vue-toastification";
 
-// Define props
+const toast = useToast();
+
 const props = defineProps({
-    category: Object, // Ensure category is an object
+    category: Object,
 });
 
-// Reactive form data
-const form = reactive({
+const form = useForm({
     name: "",
     description: "",
     errors: {},
@@ -21,20 +23,12 @@ onMounted(() => {
     }
 });
 
-// Form submission handler
-const submitForm = async () => {
-    form.processing = true;
-    try {
-        // Simulate API call or Inertia POST
-        console.log("Submitting form with data:", form);
-        // Reset errors on success
-        form.errors = {};
-    } catch (error) {
-        // Handle validation errors
-        form.errors = error.response?.data?.errors || {};
-    } finally {
-        form.processing = false;
-    }
+const submitForm = () => {
+    form.put(route("category.update", props.category.id), {
+        onSuccess: () => {
+            toast.success("Category updated successfully.");
+        },
+    });
 };
 </script>
 
