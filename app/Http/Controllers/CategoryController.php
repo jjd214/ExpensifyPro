@@ -52,9 +52,13 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
         //
+        $category = Category::findOrFail($id);
+        return Inertia::render('Category/Edit', [
+            'category' => new CategoryResource($category)
+        ]);
     }
 
     /**
