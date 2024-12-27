@@ -13,4 +13,9 @@ class Category extends Model
     {
         return $this->hasMany(Expense::class);
     }
+
+    public function scopeSearch($query, $value)
+    {
+        $query->where('name', 'like', '%' . $value . '%');
+    }
 }

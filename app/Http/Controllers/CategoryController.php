@@ -7,16 +7,18 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $category = Category::all();
+        $search = $request->input('search') ?? '';
+        $category = Category::search($search)->paginate(1);
         return Inertia::render('Category/Index', [
             'categories' => CategoryResource::collection($category)
         ]);
