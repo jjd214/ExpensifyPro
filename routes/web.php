@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Approver\ApproverController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Approval;
