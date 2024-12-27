@@ -91,6 +91,17 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Dashboard
                                 </NavLink>
+
+                                <NavLink
+                                    :href="route('employee.expense.index')"
+                                    :active="
+                                        route().current(
+                                            'employee.expense.index'
+                                        )
+                                    "
+                                >
+                                    Expenses
+                                </NavLink>
                             </div>
 
                             <!-- Approver -->

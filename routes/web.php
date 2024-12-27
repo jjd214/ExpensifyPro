@@ -4,8 +4,10 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Approver\ApproverController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Employee\EmployeeController;
+use App\Http\Controllers\Employee\ExpenseController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Approval;
+use App\Models\Expense;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,6 +35,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::prefix('employee')->name('employee.')->group(function () {
     Route::middleware(['auth', 'verified', 'role:employee'])->group(function () {
         Route::get('/dashboard', [EmployeeController::class, 'index'])->name('dashboard');
+
+        Route::resource('expense', ExpenseController::class);
     });
 });
 
