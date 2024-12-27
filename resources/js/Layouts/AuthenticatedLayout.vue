@@ -19,7 +19,11 @@ const showingNavigationDropdown = ref(false);
                     <div class="flex h-16 justify-between">
                         <div class="flex">
                             <!-- Logo -->
-                            <div class="flex shrink-0 items-center">
+                            <!-- Admin -->
+                            <div
+                                class="flex shrink-0 items-center"
+                                v-if="$page.props.auth.user.role == 'admin'"
+                            >
                                 <Link :href="route('admin.dashboard')">
                                     <ApplicationLogo
                                         class="block h-9 w-auto fill-current text-gray-800"
@@ -27,9 +31,36 @@ const showingNavigationDropdown = ref(false);
                                 </Link>
                             </div>
 
+                            <!-- Employee -->
+                            <div
+                                class="flex shrink-0 items-center"
+                                v-if="$page.props.auth.user.role == 'employee'"
+                            >
+                                <Link :href="route('employee.dashboard')">
+                                    <ApplicationLogo
+                                        class="block h-9 w-auto fill-current text-gray-800"
+                                    />
+                                </Link>
+                            </div>
+
+                            <!-- Approver -->
+                            <div
+                                class="flex shrink-0 items-center"
+                                v-if="$page.props.auth.user.role == 'approver'"
+                            >
+                                <Link :href="route('approver.dashboard')">
+                                    <ApplicationLogo
+                                        class="block h-9 w-auto fill-current text-gray-800"
+                                    />
+                                </Link>
+                            </div>
+
                             <!-- Navigation Links -->
+
+                            <!-- Admin -->
                             <div
                                 class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                                v-if="$page.props.auth.user.role == 'admin'"
                             >
                                 <NavLink
                                     :href="route('admin.dashboard')"
@@ -44,6 +75,36 @@ const showingNavigationDropdown = ref(false);
                                     "
                                 >
                                     Category
+                                </NavLink>
+                            </div>
+
+                            <!-- Employee -->
+                            <div
+                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                                v-if="$page.props.auth.user.role == 'employee'"
+                            >
+                                <NavLink
+                                    :href="route('employee.dashboard')"
+                                    :active="
+                                        route().current('employee.dashboard')
+                                    "
+                                >
+                                    Dashboard
+                                </NavLink>
+                            </div>
+
+                            <!-- Approver -->
+                            <div
+                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                                v-if="$page.props.auth.user.role == 'approver'"
+                            >
+                                <NavLink
+                                    :href="route('approver.dashboard')"
+                                    :active="
+                                        route().current('approver.dashboard')
+                                    "
+                                >
+                                    Dashboard
                                 </NavLink>
                             </div>
                         </div>
