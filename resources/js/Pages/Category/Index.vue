@@ -3,12 +3,11 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 import CategoryList from "./Partials/CategoryList.vue";
 import CategorySearchField from "./Partials/CategorySearchField.vue";
+import Pagination from "@/Components/Pagination.vue";
 
 const props = defineProps({
     categories: Object,
 });
-
-console.log(props.categories);
 </script>
 
 <template>
@@ -46,14 +45,7 @@ console.log(props.categories);
 
                 <!-- Pagination -->
                 <div class="my-4">
-                    <Link
-                        v-for="link in props.categories.meta.links"
-                        :key="link.label"
-                        v-html="link.label"
-                        :href="link.url ?? ''"
-                        class="p-1 mx-1"
-                        :class="{ 'text-slate-500': !link.url }"
-                    ></Link>
+                    <Pagination :categories="props.categories.meta.links" />
                 </div>
             </div>
         </div>

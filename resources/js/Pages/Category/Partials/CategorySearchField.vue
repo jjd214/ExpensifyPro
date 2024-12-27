@@ -17,8 +17,6 @@ watch(
         500
     )
 );
-
-defineProps({});
 </script>
 
 <template>
