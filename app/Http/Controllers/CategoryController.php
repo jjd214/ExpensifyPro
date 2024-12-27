@@ -19,7 +19,7 @@ class CategoryController extends Controller
         //
         $search = $request->input('search') ?? '';
         $category = Category::search($search)->paginate(1);
-        return Inertia::render('Category/Index', [
+        return Inertia::render('Admin/Category/Index', [
             'categories' => CategoryResource::collection($category)
         ]);
     }
@@ -30,7 +30,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return Inertia::render('Category/Create');
+        return Inertia::render('Admin/Category/Create');
     }
 
     /**
@@ -40,7 +40,7 @@ class CategoryController extends Controller
     {
         //
         Category::create($request->all());
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -58,7 +58,7 @@ class CategoryController extends Controller
     {
         //
         $category = Category::findOrFail($id);
-        return Inertia::render('Category/Edit', [
+        return Inertia::render('Admin/Category/Edit', [
             'category' => new CategoryResource($category)
         ]);
     }
@@ -70,7 +70,7 @@ class CategoryController extends Controller
     {
         //
         $category->update($request->all());
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -80,6 +80,6 @@ class CategoryController extends Controller
     {
         //
         $category->delete();
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category.index');
     }
 }

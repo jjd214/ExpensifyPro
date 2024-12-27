@@ -11,7 +11,7 @@ const props = defineProps({
 
 const deleteCategoryHandler = (id) => {
     if (confirm(`Are you sure you want to delete this category?`)) {
-        router.delete(route("category.destroy", id), {
+        router.delete(route("admin.category.destroy", id), {
             onSuccess: () => {
                 toast.success("Category deleted successfully.");
             },
@@ -56,7 +56,7 @@ const deleteCategoryHandler = (id) => {
                 </td>
                 <td class="px-6 py-4 text-center">
                     <Link
-                        :href="route('category.edit', category.id)"
+                        :href="route('admin.category.edit', category.id)"
                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                         Edit

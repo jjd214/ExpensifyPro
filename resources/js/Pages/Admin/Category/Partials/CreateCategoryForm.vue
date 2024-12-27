@@ -12,7 +12,7 @@ const form = useForm({
 });
 
 const submitForm = () => {
-    form.post(route("category.store"), {
+    form.post(route("admin.category.store"), {
         onSuccess: () => {
             toast.success("Category created successfully.");
             form.reset();

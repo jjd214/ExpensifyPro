@@ -10,7 +10,7 @@ watch(
     debounce(
         (q) =>
             router.get(
-                route("category.index"),
+                route("admin.category.index"),
                 { search: q },
                 { preserveState: true }
             ),

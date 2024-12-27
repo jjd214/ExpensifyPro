@@ -24,7 +24,7 @@ onMounted(() => {
 });
 
 const submitForm = () => {
-    form.put(route("category.update", props.category.id), {
+    form.put(route("admin.category.update", props.category.id), {
         onSuccess: () => {
             toast.success("Category updated successfully.");
         },
