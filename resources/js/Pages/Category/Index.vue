@@ -6,7 +6,10 @@ import CategorySearchField from "./Partials/CategorySearchField.vue";
 import Pagination from "@/Components/Pagination.vue";
 
 const props = defineProps({
-    categories: Object,
+    categories: {
+        type: Object,
+        required: false,
+    },
 });
 </script>
 
@@ -45,7 +48,7 @@ const props = defineProps({
 
                 <!-- Pagination -->
                 <div class="my-4">
-                    <Pagination :categories="props.categories.meta.links" />
+                    <Pagination :links="props.categories.meta" />
                 </div>
             </div>
         </div>
