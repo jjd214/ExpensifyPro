@@ -4,8 +4,6 @@ import { Link } from "@inertiajs/vue3";
 const props = defineProps({
     expenses: Object,
 });
-
-console.log(props.expenses);
 </script>
 
 <template>

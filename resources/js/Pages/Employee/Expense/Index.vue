@@ -2,10 +2,13 @@
 import { Head, Link } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import ExpenseList from "./Partials/ExpenseList.vue";
+import Pagination from "@/Components/Pagination.vue";
 
 const props = defineProps({
     expenses: Object,
 });
+
+console.log(props.expenses);
 </script>
 <template>
     <Head title="Dashboard" />
@@ -34,6 +37,10 @@ const props = defineProps({
                 <!-- Expense table -->
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <ExpenseList :expenses="props.expenses.data" />
+                </div>
+
+                <div class="my-4">
+                    <Pagination :links="props.expenses.meta" />
                 </div>
             </div>
         </div>
