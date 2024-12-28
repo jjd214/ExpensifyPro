@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryResource;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,6 +16,7 @@ class EmployeeController extends Controller
     public function index()
     {
         //
+
         return Inertia::render('Employee/Dashboard');
     }
 

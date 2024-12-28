@@ -20,7 +20,7 @@ class CategoryController extends Controller
     {
         //
         $search = $request->input('search') ?? '';
-        $category = Category::search($search)->paginate(1);
+        $category = Category::search($search)->paginate(5);
         return Inertia::render('Admin/Category/Index', [
             'categories' => CategoryResource::collection($category)
         ]);

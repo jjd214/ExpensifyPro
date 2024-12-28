@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
 use App\Models\Expense;
+use App\Models\Category;
+
 use Inertia\Inertia;
 
 class ExpenseController extends Controller
@@ -25,7 +27,10 @@ class ExpenseController extends Controller
     public function create()
     {
         //
-        return Inertia::render('Employee/Expense/Create');
+        $category = Category::select('id', 'name')->get();
+        return Inertia::render('Employee/Expense/Create', [
+            'categories' => $category
+        ]);
     }
 
     /**
@@ -34,6 +39,8 @@ class ExpenseController extends Controller
     public function store(StoreExpenseRequest $request)
     {
         //
+        Expense::create($request->all());
+        return redirect()->route('employee.expense.index');
     }
 
     /**

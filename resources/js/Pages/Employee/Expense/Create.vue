@@ -1,9 +1,16 @@
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, usePage } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import CreateExpenseForm from "./Partials/CreateExpenseForm.vue";
+
+const user = usePage().props.auth.user;
+
+const props = defineProps({
+    categories: Object,
+});
 </script>
 <template>
-    <Head title="Dashboard" />
+    <Head title="Expenses" />
 
     <AuthenticatedLayout>
         <template #header>
@@ -23,8 +30,13 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div
-                    class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
-                ></div>
+                    class="overflow-hidden bg-white shadow-sm sm:rounded-lg p-6"
+                >
+                    <CreateExpenseForm
+                        :categories="props.categories"
+                        :userId="user.id"
+                    />
+                </div>
             </div>
         </div>
     </AuthenticatedLayout>
