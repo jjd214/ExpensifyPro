@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Employee;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
+use App\Http\Resources\ExpenseResource;
 use App\Models\Expense;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 use Inertia\Inertia;
 
@@ -18,7 +20,11 @@ class ExpenseController extends Controller
     public function index()
     {
         //
-        return Inertia::render('Employee/Expense/Index');
+        $userId = Auth::id();
+        $expense = Expense::where('user_id', $userId)->paginate(5);
+        return Inertia::render('Employee/Expense/Index', [
+            'expenses' => ExpenseResource::collection($expense)
+        ]);
     }
 
     /**

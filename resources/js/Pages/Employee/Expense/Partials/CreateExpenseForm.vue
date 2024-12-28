@@ -77,7 +77,7 @@ const submitForm = () => {
             <div class="mb-4">
                 <InputLabel for="amount" value="Amount" />
                 <input
-                    type="number"
+                    type="text"
                     id="amount"
                     class="block w-full mt-1 text-sm text-gray-700 bg-white border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                     autocomplete="amount"

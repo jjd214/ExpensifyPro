@@ -1,6 +1,11 @@
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import ExpenseList from "./Partials/ExpenseList.vue";
+
+const props = defineProps({
+    expenses: Object,
+});
 </script>
 <template>
     <Head title="Dashboard" />
@@ -22,9 +27,14 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div
-                    class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
-                ></div>
+                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                    <!-- Add any additional content here -->
+                </div>
+
+                <!-- Expense table -->
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <ExpenseList :expenses="props.expenses.data" />
+                </div>
             </div>
         </div>
     </AuthenticatedLayout>
