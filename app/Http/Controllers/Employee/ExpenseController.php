@@ -60,9 +60,15 @@ class ExpenseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Expense $expense)
+    public function edit($id)
     {
         //
+        $categories = Category::select('id', 'name')->get();
+        $expense = Expense::findOrFail($id);
+        return Inertia::render('Employee/Expense/Edit', [
+            'categories' => $categories,
+            'expense' => new ExpenseResource($expense)
+        ]);
     }
 
     /**

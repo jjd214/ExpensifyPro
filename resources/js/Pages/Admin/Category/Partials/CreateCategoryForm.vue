@@ -9,6 +9,8 @@ const toast = useToast();
 const form = useForm({
     name: "",
     description: "",
+    errors: {},
+    processing: false,
 });
 
 const submitForm = () => {

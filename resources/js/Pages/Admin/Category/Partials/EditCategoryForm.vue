@@ -6,7 +6,11 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 
 const props = defineProps({
-    category: Object,
+    category: {
+        type: Object,
+        required: true,
+    },
+    
 });
 
 const form = useForm({
@@ -16,13 +20,6 @@ const form = useForm({
     processing: false,
 });
 
-onMounted(() => {
-    if (props.category) {
-        form.name = props.category.name || "";
-        form.description = props.category.description || "";
-    }
-});
-
 const submitForm = () => {
     form.put(route("admin.category.update", props.category.id), {
         onSuccess: () => {
@@ -30,6 +27,13 @@ const submitForm = () => {
         },
     });
 };
+
+onMounted(() => {
+    if (props.category) {
+        form.name = props.category.name;
+        form.description = props.category.description;
+    }
+});
 </script>
 
 <template>
