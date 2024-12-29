@@ -38,7 +38,13 @@ const approveApproval = () => {
 };
 
 const rejectApproval = () => {
-    console.log("Approval Rejected");
+    form.status = "rejected";
+    form.put(route("approver.approval.update", props.approval.id), {
+        onSuccess: () => {
+            toast.info("Rejected approval");
+        },
+        preserveScroll: true
+    });
 };
 </script>
 

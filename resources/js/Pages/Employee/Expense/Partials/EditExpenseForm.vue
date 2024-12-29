@@ -2,7 +2,7 @@
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { useForm } from "@inertiajs/vue3";
-import { onMounted } from "vue";
+import { computed, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 
 const toast = useToast();
@@ -28,15 +28,18 @@ const form = useForm({
 });
 
 const submitForm = () => {
-    // console.log("Expense ID:", props.expense.id);
-    // console.log("Route:", route("employee.expense.update", props.expense.id));
-
     form.put(route("employee.expense.update", props.expense.id), {
         onSuccess: () => {
             toast.success("Category updated successfully.");
         },
     });
 };
+
+const statusDisable = computed(() => {
+    return (
+        props.expense.status == "Approved" || props.expense.status == "Rejected"
+    );
+});
 
 onMounted(() => {
     if (props.expense) {
@@ -58,6 +61,7 @@ onMounted(() => {
                     class="block w-full mt-1 text-sm text-gray-700 bg-white border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                     v-model="form.category_id"
                     autocomplete="category"
+                    :disabled="statusDisable"
                 >
                     <option value="" disabled selected>
                         Please select an option
@@ -81,6 +85,7 @@ onMounted(() => {
                     id="description"
                     v-model="form.description"
                     autocomplete="description"
+                    :disabled="statusDisable"
                 />
                 <span class="text-red-600 text-sm">{{
                     form.errors.description
@@ -94,6 +99,7 @@ onMounted(() => {
                     class="block w-full mt-1 text-sm text-gray-700 bg-white border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                     v-model="form.amount"
                     autocomplete="amount"
+                    :disabled="statusDisable"
                 />
                 <span class="text-red-600 text-sm">{{
                     form.errors.amount
@@ -107,6 +113,7 @@ onMounted(() => {
                     id="currency"
                     v-model="form.currency"
                     auto-complete="currency"
+                    :disabled="statusDisable"
                 />
                 <span class="text-red-600 text-sm">{{
                     form.errors.currency
@@ -114,6 +121,7 @@ onMounted(() => {
             </div>
         </div>
         <button
+            v-if="!statusDisable"
             type="submit"
             class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
             :disabled="form.processing"
