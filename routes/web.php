@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Approver\ApproverController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Approver\ApprovalController;
 use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Employee\ExpenseController;
 use App\Http\Controllers\ProfileController;
@@ -43,6 +44,8 @@ Route::prefix('employee')->name('employee.')->group(function () {
 Route::prefix('approver')->name('approver.')->group(function () {
     Route::middleware(['auth', 'verified', 'role:approver'])->group(function () {
         Route::get('/dashboard', [ApproverController::class, 'index'])->name('dashboard');
+
+        Route::resource('approval', ApprovalController::class);
     });
 });
 
