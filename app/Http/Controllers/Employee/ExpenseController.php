@@ -45,7 +45,8 @@ class ExpenseController extends Controller
     public function store(StoreExpenseRequest $request)
     {
         //
-        Expense::create($request->all());
+        $expense = Expense::create($request->all());
+        $expense->approval()->create([$expense]);
         return redirect()->route('employee.expense.index');
     }
 
