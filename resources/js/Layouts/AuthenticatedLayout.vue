@@ -118,12 +118,14 @@ const showingNavigationDropdown = ref(false);
                                     Dashboard
                                 </NavLink>
                                 <NavLink
-                                    :href="route('approver.dashboard')"
+                                    :href="route('approver.approval.index')"
                                     :active="
-                                        route().current('approver.dashboard')
+                                        route().current(
+                                            'approver.approval.index'
+                                        )
                                     "
                                 >
-                                    Dashboard
+                                    Approvals
                                 </NavLink>
                             </div>
                         </div>

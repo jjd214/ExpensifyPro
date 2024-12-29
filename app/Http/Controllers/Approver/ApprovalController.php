@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreApprovalRequest;
 use App\Http\Requests\UpdateApprovalRequest;
 use App\Models\Approval;
+use Inertia\Inertia;
 
 class ApprovalController extends Controller
 {
@@ -15,6 +16,7 @@ class ApprovalController extends Controller
     public function index()
     {
         //
+        return Inertia::render('Approver/Approval/Index');
     }
 
     /**
