@@ -11,7 +11,7 @@ class UpdateApprovalRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,8 @@ class UpdateApprovalRequest extends FormRequest
     {
         return [
             //
+            'status' => 'required|string|in:approved,rejected',
+            'comment' => 'nullable'
         ];
     }
 }

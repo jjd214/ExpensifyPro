@@ -1,9 +1,10 @@
 <script setup>
-import { useForm } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 import { ref, computed } from "vue";
 import { useToast } from "vue-toastification";
 
 const toast = useToast();
+const page = usePage();
 
 const props = defineProps({
     approval: {
@@ -12,18 +13,28 @@ const props = defineProps({
     },
 });
 
-console.log(props.approval);
-
 const statusClass = computed(() => ({
     "text-green-600": props.approval.status === "Approved",
     "text-indigo-600": props.approval.status === "Pending",
     "text-red-600": props.approval.status === "Rejected",
 }));
 
-const commentInput = ref("");
+const form = useForm({
+    status: props.approval.status,
+    comment: "",
+    approver_id: page.props.auth.user.id,
+    errors: {},
+    processing: false,
+});
 
 const approveApproval = () => {
-    console.log("Approval Accepted");
+    form.status = "approved";
+    form.put(route("approver.approval.update", props.approval.id), {
+        onSuccess: () => {
+            toast.success("Approved success.");
+        },
+        preserveScroll: true,
+    });
 };
 
 const rejectApproval = () => {
@@ -139,11 +150,14 @@ const rejectApproval = () => {
                             </label>
                             <textarea
                                 id="comment"
-                                v-model="commentInput"
+                                v-model="form.comment"
                                 rows="4"
                                 class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
                                 placeholder="Enter your comment here..."
                             ></textarea>
+                            <span class="text-red-600 text-sm">{{
+                                form.errors.comment
+                            }}</span>
                             <p class="text-sm text-gray-500 mt-2">
                                 This comment will be added to the expenses
                                 record.
@@ -155,12 +169,14 @@ const rejectApproval = () => {
                             <button
                                 @click="approveApproval"
                                 class="px-6 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition duration-200"
+                                :disabled="form.processing"
                             >
                                 Approve
                             </button>
                             <button
                                 @click="rejectApproval"
                                 class="px-6 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition duration-200"
+                                :disabled="form.processing"
                             >
                                 Reject
                             </button>

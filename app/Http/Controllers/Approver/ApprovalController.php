@@ -65,6 +65,8 @@ class ApprovalController extends Controller
     public function update(UpdateApprovalRequest $request, Approval $approval)
     {
         //
+        $approval->update($request->all());
+        $approval->expense->update(['status' => $approval->status]);
     }
 
     /**
