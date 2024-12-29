@@ -42,9 +42,13 @@ class ApprovalController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Approval $approval)
+    public function show($id)
     {
         //
+        $approval = Approval::findOrFail($id);
+        return Inertia::render('Approver/Approval/Show', [
+            'approval' => new ApprovalResource($approval)
+        ]);
     }
 
     /**

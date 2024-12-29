@@ -4,8 +4,6 @@ import { Link } from "@inertiajs/vue3";
 const props = defineProps({
     approvals: Object,
 });
-
-console.log(props.approvals);
 </script>
 <template>
     <table
@@ -27,7 +25,6 @@ console.log(props.approvals);
             </tr>
         </thead>
         <tbody>
-            <!-- Loop through categories dynamically -->
             <tr
                 v-for="approval in props.approvals"
                 :key="approval.id"
