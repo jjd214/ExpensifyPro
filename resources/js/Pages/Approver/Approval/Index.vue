@@ -1,6 +1,11 @@
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import ApprovalList from "./Partials/ApprovalList.vue";
+
+const props = defineProps({
+    approvals: Object,
+});
 </script>
 <template>
     <Head title="Approvals" />
@@ -25,7 +30,9 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
                     <!-- Add any additional content here -->
                 </div>
 
-                <div class="my-4"></div>
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <ApprovalList :approvals="props.approvals.data" />
+                </div>
             </div>
         </div>
     </AuthenticatedLayout>

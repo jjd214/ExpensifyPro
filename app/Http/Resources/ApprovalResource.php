@@ -2,11 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Expense;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ExpenseResource extends JsonResource
+class ApprovalResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,14 +18,11 @@ class ExpenseResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user' => new UserResource($this->user),
-            'category' => new CategoryResource($this->category),
-            'description' => $this->description,
-            'amount' => $this->amount,
-            'currency' => $this->currency,
+            'expense' => new ExpenseResource($this->expense),
+            'approver' => new UserResource($this->approver),
             'status' => ucfirst($this->status),
-            'receipt' => $this->receipt,
-            'created_at' => (new Carbon($this->created_at))->format('Y-m-d')
+            'comment' => $this->comment,
+            'approved_at' => (new Carbon($this->updated_at))->format('Y-m-d')
         ];
     }
 }

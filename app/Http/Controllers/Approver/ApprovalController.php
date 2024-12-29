@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Approver;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreApprovalRequest;
 use App\Http\Requests\UpdateApprovalRequest;
+use App\Http\Resources\ApprovalResource;
 use App\Models\Approval;
 use Inertia\Inertia;
 
@@ -16,7 +17,10 @@ class ApprovalController extends Controller
     public function index()
     {
         //
-        return Inertia::render('Approver/Approval/Index');
+        $approvals = Approval::all();
+        return Inertia::render('Approver/Approval/Index', [
+            'approvals' => ApprovalResource::collection($approvals)
+        ]);
     }
 
     /**
