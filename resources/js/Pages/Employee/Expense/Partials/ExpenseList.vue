@@ -1,9 +1,22 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 const props = defineProps({
     expenses: Object,
 });
+
+const deleteExpenseHandler = (id) => {
+    if (confirm("Are you sure you want to delete this expenses?")) {
+        router.delete(route("employee.expense.destroy", id), {
+            onSuccess: () => {
+                toast.success("Expense deleted successfully.");
+            },
+        });
+    }
+};
 </script>
 
 <template>
