@@ -1,5 +1,9 @@
 <script setup>
+import { useForm } from "@inertiajs/vue3";
 import { ref, computed } from "vue";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 const props = defineProps({
     approval: {
@@ -16,18 +20,14 @@ const statusClass = computed(() => ({
     "text-red-600": props.approval.status === "Rejected",
 }));
 
-// Bind the comment input value
 const commentInput = ref("");
 
-// Event handlers for Accept and Reject buttons
-const acceptApproval = () => {
+const approveApproval = () => {
     console.log("Approval Accepted");
-    // Add logic to handle acceptance (e.g., API call)
 };
 
 const rejectApproval = () => {
     console.log("Approval Rejected");
-    // Add logic to handle rejection (e.g., API call)
 };
 </script>
 
@@ -153,7 +153,7 @@ const rejectApproval = () => {
                         <!-- Action Buttons -->
                         <div class="flex items-center gap-4 mt-6">
                             <button
-                                @click="acceptApproval"
+                                @click="approveApproval"
                                 class="px-6 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition duration-200"
                             >
                                 Approve

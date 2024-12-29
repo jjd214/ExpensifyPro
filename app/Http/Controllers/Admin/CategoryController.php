@@ -10,7 +10,6 @@ use App\Models\Category;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
-
 class CategoryController extends Controller
 {
     /**
@@ -20,7 +19,7 @@ class CategoryController extends Controller
     {
         //
         $search = $request->input('search') ?? '';
-        $category = Category::search($search)->paginate(5);
+        $category = Category::search($search)->paginate(5)->withQueryString();
         return Inertia::render('Admin/Category/Index', [
             'categories' => CategoryResource::collection($category)
         ]);
