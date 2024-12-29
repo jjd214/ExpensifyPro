@@ -3,6 +3,7 @@ import { Head, Link } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import ExpenseList from "./Partials/ExpenseList.vue";
 import Pagination from "@/Components/Pagination.vue";
+import ExpenseSearchField from "./Partials/ExpenseSearchField.vue";
 
 const props = defineProps({
     expenses: Object,
@@ -32,6 +33,9 @@ const props = defineProps({
                     <!-- Add any additional content here -->
                 </div>
 
+                <div class="my-4">
+                    <ExpenseSearchField />
+                </div>
                 <!-- Expense table -->
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <ExpenseList :expenses="props.expenses.data" />
