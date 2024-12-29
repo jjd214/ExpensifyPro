@@ -59,9 +59,18 @@ const deleteExpenseHandler = (id) => {
                 <td class="px-6 py-4">
                     {{ expense.currency }}
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 flex items-center">
+                    <span
+                        class="flex w-3 h-3 me-3 rounded-full"
+                        :class="{
+                            'bg-green-500': expense.status === 'Approved',
+                            'bg-indigo-500': expense.status === 'Submitted',
+                            'bg-red-500': expense.status === 'Rejected',
+                        }"
+                    ></span>
                     {{ expense.status }}
                 </td>
+
                 <td class="px-6 py-4">
                     {{ expense.created_at }}
                 </td>

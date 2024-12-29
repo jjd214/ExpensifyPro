@@ -33,7 +33,8 @@ const props = defineProps({
                     <!-- Add any additional content here -->
                 </div>
 
-                <div class="my-4">
+                <!-- Search field -->
+                <div class="my-4 flex justify-between items-center">
                     <ExpenseSearchField />
                 </div>
                 <!-- Expense table -->
