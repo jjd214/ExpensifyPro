@@ -2,6 +2,8 @@
 import { Head, Link } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import ApprovalList from "./Partials/ApprovalList.vue";
+import ApprovalSearchField from "./Partials/ApprovalSearchField.vue";
+import Pagination from "@/Components/Pagination.vue";
 
 const props = defineProps({
     approvals: Object,
@@ -30,8 +32,19 @@ const props = defineProps({
                     <!-- Add any additional content here -->
                 </div>
 
+                <!-- Approval Search -->
+                <div class="my-4">
+                    <ApprovalSearchField />
+                </div>
+
+                <!-- Approvals list -->
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <ApprovalList :approvals="props.approvals.data" />
+                </div>
+
+                <!-- Pagination -->
+                <div class="my-4">
+                    <Pagination :links="props.approvals.meta" />
                 </div>
             </div>
         </div>

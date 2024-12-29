@@ -8,16 +8,18 @@ use App\Http\Requests\UpdateApprovalRequest;
 use App\Http\Resources\ApprovalResource;
 use App\Models\Approval;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 class ApprovalController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $approvals = Approval::all();
+        $search = $request->input('search') ?? '';
+        $approvals = Approval::search($search)->paginate(5)->withQueryString();
         return Inertia::render('Approver/Approval/Index', [
             'approvals' => ApprovalResource::collection($approvals)
         ]);
