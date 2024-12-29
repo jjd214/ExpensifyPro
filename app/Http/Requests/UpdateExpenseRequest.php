@@ -11,7 +11,7 @@ class UpdateExpenseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,17 @@ class UpdateExpenseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'category_id' => 'required',
+            'description' => 'required|string',
+            'amount' => 'required|numeric',
+            'currency' => 'required|string',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'category_id.required' => 'The category field is required'
         ];
     }
 }

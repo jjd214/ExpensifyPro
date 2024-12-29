@@ -3,6 +3,9 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { useForm } from "@inertiajs/vue3";
 import { onMounted } from "vue";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 const props = defineProps({
     expense: {
@@ -15,8 +18,6 @@ const props = defineProps({
     },
 });
 
-console.log(props.categories);
-
 const form = useForm({
     category_id: "",
     description: "",
@@ -26,7 +27,16 @@ const form = useForm({
     processing: false,
 });
 
-const submitForm = () => {};
+const submitForm = () => {
+    // console.log("Expense ID:", props.expense.id);
+    // console.log("Route:", route("employee.expense.update", props.expense.id));
+
+    form.put(route("employee.expense.update", props.expense.id), {
+        onSuccess: () => {
+            toast.success("Category updated successfully.");
+        },
+    });
+};
 
 onMounted(() => {
     if (props.expense) {
@@ -46,17 +56,21 @@ onMounted(() => {
                 <select
                     id="category"
                     class="block w-full mt-1 text-sm text-gray-700 bg-white border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                    v-model="form.category_id"
                     autocomplete="category"
                 >
                     <option value="" disabled selected>
                         Please select an option
                     </option>
 
-                    <!-- <option
+                    <option
                         v-for="category in props.categories"
                         :key="category.id"
-                        value=""
-                    ></option> -->
+                        :value="category.id"
+                        :selected="category.id === form.category_id"
+                    >
+                        {{ category.name }}
+                    </option>
                 </select>
             </div>
             <div class="mb-4">
