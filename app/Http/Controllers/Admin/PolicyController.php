@@ -59,9 +59,15 @@ class PolicyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Policy $policy)
+    public function edit($id)
     {
         //
+        $categories = Category::select('id', 'name')->get();
+        $policy = Policy::findOrFail($id);
+        return Inertia::render('Admin/Policy/Edit', [
+            'policy' => new PolicyResource($policy),
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -70,6 +76,8 @@ class PolicyController extends Controller
     public function update(UpdatePolicyRequest $request, Policy $policy)
     {
         //
+        $policy->update($request->all());
+        return redirect()->route('admin.policy.index');
     }
 
     /**
