@@ -1,6 +1,16 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
+import PolicyList from "./Partials/PolicyList.vue";
+import PolicySearchField from "./Partials/PolicySearchField.vue";
+import Pagination from "@/Components/Pagination.vue";
+
+const props = defineProps({
+    policies: {
+        type: Object,
+        required: false,
+    },
+});
 </script>
 
 <template>
@@ -24,6 +34,21 @@ import { Head, Link, router } from "@inertiajs/vue3";
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <!-- Add any additional content here -->
+                </div>
+
+                <!-- Search field -->
+                <div class="my-4">
+                    <PolicySearchField />
+                </div>
+
+                <!-- Policy table -->
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <PolicyList :policies="props.policies.data" />
+                </div>
+
+                <!-- Paginate -->
+                <div class="my-4">
+                    <Pagination :links="props.policies.meta" />
                 </div>
             </div>
         </div>

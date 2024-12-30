@@ -5,19 +5,25 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePolicyRequest;
 use App\Http\Requests\UpdatePolicyRequest;
+use App\Http\Resources\PolicyResource;
 use App\Models\Category;
 use App\Models\Policy;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 class PolicyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return Inertia::render('Admin/Policy/Index');
+        $search = $request->input('search') ?? '';
+        $policies = Policy::search($search)->paginate(5);
+        return Inertia::render('Admin/Policy/Index', [
+            'policies' => PolicyResource::collection($policies)
+        ]);
     }
 
     /**

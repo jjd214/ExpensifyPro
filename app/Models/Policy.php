@@ -13,4 +13,11 @@ class Policy extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function scopeSearch($query, $value)
+    {
+        $query->wherehas('category', function ($q) use ($value) {
+            $q->where('name', 'like', '%' . $value . '%');
+        });
+    }
 }
