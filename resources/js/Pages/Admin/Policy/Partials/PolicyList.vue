@@ -9,11 +9,11 @@ const props = defineProps({
     policies: Array,
 });
 
-const deleteCategoryHandler = (id) => {
-    if (confirm(`Are you sure you want to delete this category?`)) {
-        router.delete(route("admin.category.destroy", id), {
+const deletePolicyHandler = (id) => {
+    if (confirm(`Are you sure you want to delete this policy?`)) {
+        router.delete(route("admin.policy.destroy", id), {
             onSuccess: () => {
-                toast.success("Category deleted successfully.");
+                toast.success("Policy deleted successfully.");
             },
         });
     }
@@ -30,6 +30,7 @@ const deleteCategoryHandler = (id) => {
             <tr>
                 <th scope="col" class="px-6 py-3">Category name</th>
                 <th scope="col" class="px-6 py-3">Limit</th>
+                <th scope="col" class="px-6 py-3">Currency</th>
                 <th scope="col" class="px-6 py-3">Description</th>
                 <th scope="col" class="px-6 py-3">Date added</th>
                 <th scope="col" class="px-6 py-3">
@@ -51,6 +52,9 @@ const deleteCategoryHandler = (id) => {
                 </td>
                 <td class="px-6 py-4">
                     {{ policy.limit }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ policy.currency }}
                 </td>
                 <td class="px-6 py-4">
                     {{ policy.description }}

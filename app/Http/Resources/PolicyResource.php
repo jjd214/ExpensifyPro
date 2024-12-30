@@ -19,6 +19,7 @@ class PolicyResource extends JsonResource
             'id' => $this->id,
             'category' => new CategoryResource($this->category),
             'limit' => $this->limit,
+            'currency' => $this->currency,
             'description' => $this->description,
             'created_at' => (new Carbon($this->created_at))->format('Y-m-d')
         ];

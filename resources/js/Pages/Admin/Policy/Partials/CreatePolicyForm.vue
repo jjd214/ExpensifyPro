@@ -16,6 +16,7 @@ const toast = useToast();
 const form = useForm({
     category_id: "",
     limit: "",
+    currency: "",
     description: "",
     errors: {},
     processing: false,
@@ -68,6 +69,19 @@ const submitForm = () => {
                 />
                 <span class="text-red-600">
                     <small>{{ form.errors.limit }}</small>
+                </span>
+            </div>
+            <div class="mb-4">
+                <InputLabel for="currency" value="Currency" />
+                <TextInput
+                    type="text"
+                    class="mt-1 block w-full"
+                    id="description"
+                    v-model="form.currency"
+                    autocomplete="currency"
+                />
+                <span class="text-red-600">
+                    <small>{{ form.errors.currency }}</small>
                 </span>
             </div>
             <div class="mb-4">

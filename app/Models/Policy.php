@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Policy extends Model
 {
     //
-    protected $fillable = ['category_id', 'limit', 'description'];
+    protected $fillable = ['category_id', 'limit', 'currency', 'description'];
 
     public function category()
     {

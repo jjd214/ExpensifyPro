@@ -25,6 +25,7 @@ class StorePolicyRequest extends FormRequest
             //
             'category_id' => 'required',
             'limit' => 'required|numeric',
+            'currency' => 'required',
             'description' => 'nullable|string'
         ];
     }
