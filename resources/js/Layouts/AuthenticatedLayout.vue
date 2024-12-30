@@ -76,6 +76,14 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Category
                                 </NavLink>
+                                <NavLink
+                                    :href="route('admin.policy.index')"
+                                    :active="
+                                        route().current('admin.policy.index')
+                                    "
+                                >
+                                    Policy
+                                </NavLink>
                             </div>
 
                             <!-- Employee -->

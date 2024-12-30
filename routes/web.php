@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Approver\ApproverController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PolicyController;
 use App\Http\Controllers\Approver\ApprovalController;
 use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Employee\ExpenseController;
@@ -30,6 +31,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
         Route::resource('category', CategoryController::class);
+        Route::resource('policy', PolicyController::class);
     });
 });
 
