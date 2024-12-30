@@ -23,7 +23,7 @@ class ExpenseController extends Controller
         //
         $userId = Auth::id();
         $search = $request->input('search') ?? '';
-        $expense = Expense::search($search)->where('user_id', $userId)->paginate(2)->withQueryString();
+        $expense = Expense::search($search)->where('user_id', $userId)->paginate(5)->withQueryString();
         return Inertia::render('Employee/Expense/Index', [
             'expenses' => ExpenseResource::collection($expense)
         ]);

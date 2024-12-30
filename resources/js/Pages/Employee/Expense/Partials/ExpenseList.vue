@@ -1,11 +1,16 @@
 <script setup>
 import { Link, router } from "@inertiajs/vue3";
+import { computed } from "vue";
 import { useToast } from "vue-toastification";
 
 const toast = useToast();
 
 const props = defineProps({
     expenses: Object,
+});
+
+const statusDisable = computed(() => {
+    return ["Approved", "Rejected"].includes(props.expenses.status);
 });
 
 const deleteExpenseHandler = (id) => {
@@ -75,19 +80,26 @@ const deleteExpenseHandler = (id) => {
                     {{ expense.created_at }}
                 </td>
                 <td class="px-6 py-4 text-center">
-                    <Link
-                        :href="route('employee.expense.edit', expense.id)"
-                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                    >
-                        Edit
-                    </Link>
-                    <button
-                        type="button"
-                        @click="deleteExpenseHandler(expense.id)"
-                        class="font-medium text-red-600 dark:text-red-500 hover:underline"
-                    >
-                        Delete
-                    </button>
+                    <div class="flex justify-center space-x-1">
+                        <Link
+                            :href="route('employee.expense.edit', expense.id)"
+                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                        >
+                            {{
+                                expense.status === "Approved" ||
+                                expense.status === "Rejected"
+                                    ? "View"
+                                    : "Edit"
+                            }}
+                        </Link>
+                        <button
+                            type="button"
+                            @click="deleteExpenseHandler(expense.id)"
+                            class="font-medium text-red-600 dark:text-red-500 hover:underline"
+                        >
+                            Delete
+                        </button>
+                    </div>
                 </td>
             </tr>
         </tbody>
