@@ -19,9 +19,13 @@ const statusClass = computed(() => ({
     "text-red-600": props.approval.status === "Rejected",
 }));
 
+const statusDisable = computed(() => {
+    return ["Approved", "Rejected"].includes(props.approval.status);
+});
+
 const form = useForm({
     status: props.approval.status,
-    comment: "",
+    comment: props.approval.comment ?? "",
     approver_id: page.props.auth.user.id,
     errors: {},
     processing: false,
@@ -43,7 +47,7 @@ const rejectApproval = () => {
         onSuccess: () => {
             toast.info("Rejected approval");
         },
-        preserveScroll: true
+        preserveScroll: true,
     });
 };
 </script>
@@ -133,17 +137,27 @@ const rejectApproval = () => {
                                 <strong>Status:</strong>
                                 {{ props.approval.status }}
                             </p>
-                            <p class="text-sm text-gray-600">
+                            <p
+                                class="text-sm text-gray-600"
+                                v-if="statusDisable"
+                            >
                                 <strong>Approval Date:</strong>
                                 {{ props.approval.approved_at }}
                             </p>
                             <p
+                                v-if="statusDisable"
+                                class="text-sm text-gray-600"
+                            >
+                                <strong>Approver:</strong>
+                                {{ props.approval.approver.name }}
+                            </p>
+                            <!-- <p
                                 v-if="props.approval.comment"
                                 class="text-sm text-gray-600"
                             >
                                 <strong>Previous Comment:</strong>
                                 {{ props.approval.comment }}
-                            </p>
+                            </p> -->
                         </div>
 
                         <!-- Comment Input -->
@@ -160,18 +174,25 @@ const rejectApproval = () => {
                                 rows="4"
                                 class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
                                 placeholder="Enter your comment here..."
+                                :disabled="statusDisable"
                             ></textarea>
                             <span class="text-red-600 text-sm">{{
                                 form.errors.comment
                             }}</span>
-                            <p class="text-sm text-gray-500 mt-2">
+                            <p
+                                class="text-sm text-gray-500 mt-2"
+                                v-if="!statusDisable"
+                            >
                                 This comment will be added to the expenses
                                 record.
                             </p>
                         </div>
 
                         <!-- Action Buttons -->
-                        <div class="flex items-center gap-4 mt-6">
+                        <div
+                            class="flex items-center gap-4 mt-6"
+                            v-if="!statusDisable"
+                        >
                             <button
                                 @click="approveApproval"
                                 class="px-6 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition duration-200"
