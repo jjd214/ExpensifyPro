@@ -14,6 +14,11 @@ class Category extends Model
         return $this->hasMany(Expense::class);
     }
 
+    public function policy()
+    {
+        return $this->hasOne(Policy::class);
+    }
+
     public function scopeSearch($query, $value)
     {
         $query->where('name', 'like', '%' . $value . '%');
