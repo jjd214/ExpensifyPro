@@ -23,16 +23,15 @@ const props = defineProps({
                     Back
                 </Link>
             </div>
-
-            <div class="py-12">
-                <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div
-                        class="overflow-hidden bg-white shadow-sm sm:rounded-lg p-6"
-                    >
-                        <EditCategoryForm :category="props.category.data" />
-                    </div>
+        </template>
+        <div class="py-12">
+            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div
+                    class="overflow-hidden bg-white shadow-sm sm:rounded-lg p-6"
+                >
+                    <EditCategoryForm :category="props.category.data" />
                 </div>
             </div>
-        </template>
+        </div>
     </AuthenticatedLayout>
 </template>

@@ -110,6 +110,15 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Expenses
                                 </NavLink>
+
+                                <NavLink
+                                    :href="route('employee.policy.index')"
+                                    :active="
+                                        route().current('employee.policy.index')
+                                    "
+                                >
+                                    Policy
+                                </NavLink>
                             </div>
 
                             <!-- Approver -->
